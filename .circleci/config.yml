@@ -6,10 +6,10 @@ jobs:
     steps:
       - checkout
       - run: echo "A first hello"
-      - run: mkdir -p my_workspace
-      - run: echo "Trying out workspace" > my_workspace/echo-output
+      - run: mkdir -p /home/circleci/my_workspace
+      - run: echo "Trying out workspace" > /home/circleci/my_workspace/echo-output
       - persist_to_workspace:
-          root: ~/my_workspace
+          root: my_workspace
           paths:
             - echo_output
   two:
