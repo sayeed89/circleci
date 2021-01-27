@@ -10,12 +10,12 @@ jobs:
     steps:
       - checkout
       - run: echo "A first hello"
-      - run: mkdir -p *workspace_root
+      - run: mkdir -p my_workspace
       - run: echo "Trying out workspace" > my_workspace/echo-output
       - persist_to_workspace:
           root: *workspace_root
           paths:
-            - echo-output
+            - .
       - store_artifacts:
           path: *workspace_root 
   two:
