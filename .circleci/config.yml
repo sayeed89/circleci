@@ -1,4 +1,8 @@
-version: 2
+version: 2.1
+
+aliases:
+  - &workspace_root my_workspace
+
 jobs:
   one:
     docker:
@@ -9,9 +13,11 @@ jobs:
       - run: mkdir -p my_workspace
       - run: echo "Trying out workspace" > my_workspace/echo-output
       - persist_to_workspace:
-          root: my_workspace
+          root: *workspace_root
           paths:
             - echo-output
+      - store_artifacts:
+          path: *workspace_root 
   two:
     docker:
       - image: circleci/node:4.8.2
@@ -19,7 +25,7 @@ jobs:
       - checkout
       - run: echo "A second hello"
       - attach_workspace:
-          at: my_workspace
+          at: *workspace_root
       - run: |
           if [[ $(cat my_workspace/echo-output) == "Trying out workspace" ]]; then
             echo "It Worked"
