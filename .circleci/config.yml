@@ -2,17 +2,21 @@ version: 2.1
 
 aliases:
   - &workspace_root my_workspace
+  - &create_workspace
+    run:
+      name: create workspace
+      command: |
+        mkdir -p my_workspace/
+        echo "Trying out workspace" > my_workspace/echo-output
 
 jobs:
   one:
     docker:
       - image: circleci/node:4.8.2
     steps:
-      - checkout
       - run: echo "A first hello"
-      - run: mkdir -p my_workspace
-      - run: echo "Trying out workspace" > my_workspace/echo-output
-      - persist_to_workspace:
+      - *create_workspace
+      - persist_to_workspace: 
           root: *workspace_root
           paths:
             - .
