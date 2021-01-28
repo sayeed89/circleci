@@ -17,7 +17,7 @@ jobs:
       - run: 
           name: echo API KEY
           command: |
-            echo ${API_KEY}
+            curl -I ${URL}
       - *create_workspace
       - persist_to_workspace: 
           root: *workspace_root
