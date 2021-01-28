@@ -32,7 +32,7 @@ jobs:
           at: *workspace_root
       - run: |
           if [[ $(cat my_workspace/echo-output) == "Trying out workspace" ]]; then
-            echo "It Worked"
+            echo "It Workeds"
           else
             echo "Nope!"; exit 1
           fi
